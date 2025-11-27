@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackHungry 2025 - Parodia para devs</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --card: #13151d;
+      --accent: #ff7b00;
+      --text: #e5e7eb;
+      --muted: #a0aec0;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(255,123,0,0.1), transparent 25%),
+                  radial-gradient(circle at 80% 0%, rgba(255,123,0,0.08), transparent 20%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      padding: 2.5rem 1.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span {
+      background: var(--accent);
+      color: #0b0c10;
+      padding: 0.25rem 0.55rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    .hero {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+      padding-bottom: 2rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 123, 0, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(255, 123, 0, 0.3);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      margin: 0.5rem 0;
+      line-height: 1.1;
+    }
+    .hero p {
+      margin: 0.25rem 0 1.25rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      text-decoration: none;
+      color: #0b0c10;
+      background: var(--accent);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 30px rgba(255, 123, 0, 0.2);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(255, 123, 0, 0.25); }
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--border);
+      box-shadow: none;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      padding: 0 1.5rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+    .card h3 { margin-top: 0; margin-bottom: 0.4rem; }
+    .card p { margin: 0; color: var(--muted); }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+    .pill { background: rgba(255,255,255,0.05); padding: 0.35rem 0.65rem; border-radius: 8px; color: var(--muted); font-weight: 700; font-size: 0.85rem; border: 1px solid var(--border); }
+
+    .section {
+      padding: 1.5rem 1.5rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      margin: 0 0 0.6rem;
+      font-size: 1.7rem;
+    }
+    .section small { color: var(--muted); }
+    .timeline { display: grid; gap: 1rem; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+    .timeline-item strong { color: var(--accent); }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.9rem; }
+    .cta {
+      text-align: center;
+      padding: 2.5rem 1.5rem 3rem;
+    }
+    .cta p { color: var(--muted); max-width: 620px; margin: 0.75rem auto 1.5rem; }
+    footer { border-top: 1px solid var(--border); padding: 1rem 1.5rem 2rem; color: var(--muted); text-align: center; }
+
+    @media (max-width: 640px) {
+      nav { flex-direction: column; align-items: flex-start; }
+      .timeline-item { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="logo" href="#">
+        <span>2025</span>
+        HackHungry: La única incubadora que garantiza calorías imaginarias
+      </a>
+      <div class="nav-links">
+        <a href="#crisis">La crisis</a>
+        <a href="#plan">Plan Nutricional</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </nav>
+    <div class="hero">
+      <div>
+        <div class="badge">Parodia seria (pero no tanto) — Futuro inmediato</div>
+        <h1>La hambruna dev 2025: ¿junior, senior o snack?</h1>
+        <p>
+          Bienvenido a la landing que nadie pidió: un recorrido satírico sobre cómo los desarrolladores
+          podrían terminar pagados en cupones de ramen genérico mientras la IA les escribe el código y la carta de renuncia.
+        </p>
+        <div class="actions">
+          <a class="btn" href="#plan">Quiero mi dieta de commits</a>
+          <a class="btn secondary" href="#faq">Prefiero seguir en negación →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Estado actual: Definición de "beneficios"</h3>
+        <p>• Seguro médico opcional, pero obligatorio el newsletter motivacional.<br>
+           • Café ilimitado… siempre que traigas tu café.<br>
+           • PTO = "Please, Trabaja Otra-vez".</p>
+        <div class="pill-row">
+          <div class="pill">Salario: exposure</div>
+          <div class="pill">Stack: IA + fe</div>
+          <div class="pill">Mentoría: memes</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="crisis" class="section card">
+    <h2>Por qué la nevera estará vacía</h2>
+    <small>Estadísticas fabricadas con rigurosidad imaginaria</small>
+    <div class="card-grid">
+      <div class="card">
+        <h3>70% menos snacks</h3>
+        <p>El presupuesto de galletas se reasignó a "suscripciones premium a chatbots". Prioridades.</p>
+      </div>
+      <div class="card">
+        <h3>Managers en modo chef</h3>
+        <p>OKRs de 2025: "Que cada repo compile" y "que cada dev traiga su propio tupper".</p>
+      </div>
+      <div class="card">
+        <h3>Reuniones al vapor</h3>
+        <p>Scrum diario ahora incluye receta del día: "cómo hacer sopa con 2 líneas de código y esperanza".</p>
+      </div>
+      <div class="card">
+        <h3>IA con hambre</h3>
+        <p>Los modelos comen GPU y presupuestos; los devs, presentaciones motivacionales en PDF.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plan" class="section">
+    <h2>Plan nutricional para devs resilientes</h2>
+    <small>Supervivencia corporativa en 4 sprints</small>
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>Q1 · Fast Food</strong>
+        <p>Reemplaza especificaciones ambiguas por sopas instantáneas. El equipo gana calorías y pierde claridad.</p>
+      </div>
+      <div class="timeline-item">
+        <strong>Q2 · Dieta Agile</strong>
+        <p>User stories convertidas en recetas. Story points = cucharadas de arroz. Retro: ¿alguien vio al Product Owner?</p>
+      </div>
+      <div class="timeline-item">
+        <strong>Q3 · Ayuno Intermitente</strong>
+        <p>La IA codea mientras duermes. Tú haces pull requests de olor a tostadas imaginarias.</p>
+      </div>
+      <div class="timeline-item">
+        <strong>Q4 · Banquete</strong>
+        <p>Demo final con pastel ficticio. KPI: número de memes producidos por commit aceptado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section card">
+    <h2>FAQ para estómagos valientes</h2>
+    <small>Respuestas sarcásticas incluidas</small>
+    <div class="faq-grid">
+      <div class="card">
+        <h3>¿Esto es real?</h3>
+        <p>No, pero si lo fuera, ya habrías firmado el waiver de hambre voluntaria.</p>
+      </div>
+      <div class="card">
+        <h3>¿Qué incluye el onboarding?</h3>
+        <p>Un GIF motivador, una taza sin café y un tutorial para calentar pizza con el calor del servidor.</p>
+      </div>
+      <div class="card">
+        <h3>¿Se acepta pago en comida?</h3>
+        <p>Claro, especialmente si trae salsa. HR lo llama "equity líquida".</p>
+      </div>
+      <div class="card">
+        <h3>¿Hay plan de carrera?</h3>
+        <p>Sí: Trainee → Developer → Senior → Chef de Base de Datos → Influencer tech.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="badge">Modo supervivencia activado</div>
+    <h2>Únete a la primera comunidad que mide su burn rate en calorías</h2>
+    <p>
+      HackHungry 2025 es una parodia (por ahora). Comparte esta landing con tus compañeros y practica tu dieta de commits responsables.
+      Recuerda: si el deploy falló, siempre puedes culpar a la falta de snacks.
+    </p>
+    <div class="actions" style="justify-content:center;">
+      <a class="btn" href="#">Quiero mi kit de emergencia</a>
+      <a class="btn secondary" href="#crisis">Releer las estadísticas inventadas</a>
+    </div>
+  </section>
+
+  <footer>
+    Hecho con humor ácido, CSS artesanal y cero calorías reales. 2024 → 2025.
+  </footer>
+</body>
+</html>
